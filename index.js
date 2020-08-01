@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
 });
 
 const optionsCors = {
-    origin: 'https://svisni-sushi.ru/',
+    origin: 'https://svisni-sushi.ru',
     optionsSuccessStatus: 200,
     preflightContinue: false,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
