@@ -15,12 +15,22 @@
     "nodemon": "^2.0.2"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-form-data": "^2.0.11",
     "nodemailer": "^6.4.2",
     "nodemailer-sendgrid-transport": "^0.2.0"
   },
-   "repository": {
-     "type": "git",
-     "url": "https://github.com/MaZarrr/servesvish"
-   }
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MaZarrr/servesvish"
+  },
+  "resolutions": {
+    "browserslist": "^4.8.3",
+    "caniuse-lite": "^1.0.30001019"
+  },
+  "engines": {
+    "node": ">=5.0.0",
+    "npm": "6.4.1"
+  }
 }
