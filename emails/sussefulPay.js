@@ -1,5 +1,4 @@
 const keys = require('../keys')
-    // <p><b>Способ оплаты: </b>${message.payForm}</p>
 
 module.exports = (body, message) => {
 
