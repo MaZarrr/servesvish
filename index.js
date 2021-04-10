@@ -26,9 +26,6 @@ app.use(express.urlencoded({
 // app.use(bodyParser.urlencoded({
 //   extended: true
 // }));
-// app.use(bodyParser.json());
-
-
 
 app.get('/', (req, res) => {
 //   const randomId = `${Math.random()}`.slice(2);
