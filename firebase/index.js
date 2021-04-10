@@ -5,7 +5,7 @@ var serviceAccount = require("../config/serviceAccountKey.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: process.env.DATABASE
+    databaseURL: "https://svisni-sushi.firebaseio.com"
 });
 
 module.exports = admin;
