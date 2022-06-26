@@ -12,7 +12,7 @@ exports.orderCheck = (req, res, next) => {
     const user_id = ordersRef.push().key;
     ordersRef.child(user_id).set(req.body);
    //
- ordersRef.orderByKey().limitToLast(1).on('child_added', async snapshot => {
+ ordersRef.orderByKey().limitToLast(1).on('child_added', snapshot => {
         const dataOrder =  snapshot.val();
         console.log(dataOrder);
         const orderList = dataOrder.products.map(elem => {
@@ -120,7 +120,7 @@ exports.orderCheck = (req, res, next) => {
             });
           
             // send mail with defined transport object
-            let info = await transporter.sendMail(emailData)
+           transporter.sendMail(emailData)
             .then(() => {})
             .catch(error => console.log(error))
              
