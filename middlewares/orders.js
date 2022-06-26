@@ -10,7 +10,7 @@ let ordersRef = db.ref("/order");
 exports.orderCheck = (req, res, next) => {
     const user_id = ordersRef.push().key;
     ordersRef.child(user_id).set(req.body);
-   
+   //
  ordersRef.orderByKey().limitToLast(1).on('child_added', snapshot => {
         const dataOrder =  snapshot.val();
         console.log(dataOrder);
