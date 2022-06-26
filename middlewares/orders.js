@@ -1,17 +1,18 @@
 const admin = require("../firebase");
-const sgMail = require('@sendgrid/mail');
-require('dotenv').config();
+const nodemailer = require("nodemailer");
+// const sgMail = require('@sendgrid/mail');
 
-sgMail.setApiKey(process.env.SEND_GRID_API);
+require('dotenv').config();
+console.log("process.env.SEND_GRID_API__", process.env.SEND_GRID_API);
+// sgMail.setApiKey(process.env.SEND_GRID_API);
 
 let db = admin.database();
 let ordersRef = db.ref("/order");
-
 exports.orderCheck = (req, res, next) => {
     const user_id = ordersRef.push().key;
     ordersRef.child(user_id).set(req.body);
    //
- ordersRef.orderByKey().limitToLast(1).on('child_added', snapshot => {
+ ordersRef.orderByKey().limitToLast(1).on('child_added', async snapshot => {
         const dataOrder =  snapshot.val();
         console.log(dataOrder);
         const orderList = dataOrder.products.map(elem => {
@@ -59,10 +60,12 @@ exports.orderCheck = (req, res, next) => {
             <p><b style="font-size: 18px">Код двери подьезда: </b> ${dataOrder.delivery.podezd}</p>
         `
         };
+        console.log(" process.env.EMAIL_FROM__",  process.env.EMAIL_FROM);
+        console.log(" process.env.EMAIL_TO",  process.env.EMAIL_TO);
 
         const emailData = {
-            from: process.env.EMAIL_FROM,
-            to: process.env.EMAIL_TO,
+            from: "mazarar@yandex.ru",
+            to: "tbezhenova@yandex.ru",
             subject: 'Новый заказ',
             html: `
                  <div>
@@ -101,19 +104,38 @@ exports.orderCheck = (req, res, next) => {
                 </div>
             `
         };
-        sgMail
-            .send(emailData)
-            .then(() => {}, error => {
-            console.error(error);
 
-            if (error.response) {
-                console.error(error.response.body)
-            }
-  });
-        // sgMail.send(emailData)
-        // msg = sgMail.send(emailData)
-        // return msg
-        // res.end()
+            // Generate test SMTP service account from ethereal.email
+            // Only needed if you don't have a real mail account for testing
+          
+            // create reusable transporter object using the default SMTP transport
+            let transporter = nodemailer.createTransport({
+              host: "smtp.yandex.ru",
+              port: 465,
+              secure: true, // true for 465, false for other ports
+              auth: {
+                user: "mazarar@yandex.ru", // generated ethereal user
+                pass: "gqgdgwqzxrbaqaxm" // generated ethereal password
+              }
+            });
+          
+            // send mail with defined transport object
+            let info = await transporter.sendMail(emailData)
+            .then(() => {})
+            .catch(error => console.log(error))
+             
+            // console.log("Message sent: %s", info.messageId);
+
+//         sgMail
+//             .send(emailData)
+//             .then(() => {}, error => {
+//             console.error(error);
+
+//             if (error.response) {
+//                 console.error(error.response.body)
+//             }
+//   });
+        
     });
     next()
 

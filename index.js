@@ -3,7 +3,7 @@ const cors = require('cors');
 // const bodyParser = require('body-parser');
 
 const app = express();
-const port = process.env.PORT || 3030; // default port to listen
+const port = 3000; // default port to listen
 
 // middlewares
 const { orderCheck } = require("./middlewares/orders");
@@ -12,7 +12,8 @@ const { orderCheck } = require("./middlewares/orders");
 const { createOrPushUserOrder } = require("./controllers/orders");
 
 const optionsCors = {
-  origin: "https://svisni-sushi.ru",
+  origin: "*",
+  // origin: "https://svisni-sushi.ru",
   allowedHeaders: "Origin,X-Requested-With,Content-Type,Accept",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   optionsSuccessStatus: 200
