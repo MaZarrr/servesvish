@@ -60,8 +60,8 @@ exports.orderCheck = (req, res, next) => {
             <p><b style="font-size: 18px">Код двери подьезда: </b> ${dataOrder.delivery.podezd}</p>
         `
         };
-        console.log(" process.env.EMAIL_FROM__",  process.env.EMAIL_FROM);
-        console.log(" process.env.EMAIL_TO",  process.env.EMAIL_TO);
+        // console.log(" process.env.EMAIL_FROM__",  process.env.EMAIL_FROM);
+        // console.log(" process.env.EMAIL_TO",  process.env.EMAIL_TO);
 
         const emailData = {
             from: "mazarar@yandex.ru",
